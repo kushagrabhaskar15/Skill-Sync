@@ -1,0 +1,25 @@
+{
+  "recommendationIngestion": {
+    "method": "POST",
+    "path": "/api/recommendations/ai-ingest",
+    "body": {
+      "userId": 101,
+      "recommendations": [{
+        "recommendedUserId": 208,
+        "matchScore": 0.92,
+        "matchedSkills": ["Java"],
+        "learningOpportunities": ["Spring Boot"],
+        "sharedInterests": ["Backend Development"],
+        "explanation": "You can teach Java; this user can teach you Spring Boot."
+      }],
+      "sourceVersion": "skillsync-ai-1.0.0"
+    },
+    "backendRequirement": "Validate records and upsert recommendations using the unique (user_id, recommended_user_id) key."
+  },
+  "feedbackForwarding": {
+    "method": "POST",
+    "path": "/api/recommendations/ai-feedback",
+    "body": {"recommendationId": 12, "userId": 101, "rating": 5, "feedbackText": "Useful match"},
+    "backendRequirement": "Validate ownership and persist into recommendation_feedback."
+  }
+}
