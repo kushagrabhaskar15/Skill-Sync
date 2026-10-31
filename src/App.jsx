@@ -111,7 +111,7 @@ export default function App() {
       case 'connections': return <Connections peers={data.peers} onMessage={(id) => { setInitialMessagePeer(id); setPage('messages'); }} onDiscover={() => setPage('discover')} onAccept={(id) => run(() => demoApi.setPeerStatus(id, 'connected'), 'Connection added to your learning circle.')} />;
       case 'messages': return <Messages key={initialMessagePeer} peers={data.peers} messages={data.messages} onSend={sendMessage} initialPeer={initialMessagePeer} />;
       case 'analysis': return <SkillAnalysis user={data.user} onEditProfile={() => setPage('profile')} onDiscover={() => setPage('discover')} />;
-      case 'settings': return <Settings user={data.user} theme={theme} onThemeChange={setTheme} onSave={(updates) => run(() => demoApi.updateUser(updates), 'Account details saved.')} onReset={async () => { const next = await run(() => demoApi.reset(), 'Demo data was reset.'); if (next) setPage('landing'); }} />;
+      case 'settings': return <Settings user={data.user} theme={theme} onThemeChange={setTheme} onSave={(updates) => run(() => demoApi.updateUser(updates), 'Account details saved.')} onLogout={logout} onReset={async () => { const next = await run(() => demoApi.reset(), 'Demo data was reset.'); if (next) setPage('landing'); }} />;
       case 'admin': return <Admin peers={data.peers} />;
       default: return <Dashboard user={data.user} peers={data.peers} activities={data.activities} onNavigate={setPage} onSelectPeer={openPeer} onConnect={connect} />;
     }

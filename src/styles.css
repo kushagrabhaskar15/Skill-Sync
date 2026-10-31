@@ -69,3 +69,9 @@
 :root[data-theme="dark"] .settings-danger{border-color:#604044}
 :root[data-theme="dark"] .settings-icon,:root[data-theme="dark"] .metric-icon,:root[data-theme="dark"] .state-icon,:root[data-theme="dark"] .goal-hero-icon,:root[data-theme="dark"] .why-icon,:root[data-theme="dark"] .tip-icon{filter:brightness(.82) saturate(.9)}
 :root[data-theme="dark"] .filter-row select,:root[data-theme="dark"] .breadcrumbs,:root[data-theme="dark"] .topbar-user{color:#a8b0c5}
+
+/* Keep account actions reachable when the browser viewport is short. */
+.sidebar{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#dfe2ed transparent}
+.settings-logout{display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media (max-height:920px) and (min-width:901px){.sidebar{padding-top:16px;padding-bottom:8px}.sidebar .brand{margin-bottom:21px}.side-label-bottom{margin-top:17px}.sidebar-promo{display:none}.profile-switch{padding-top:8px;padding-bottom:7px}.logout-button{padding-top:6px;padding-bottom:6px}}
+@media (max-width:680px){.settings-logout{align-items:flex-start;flex-direction:column}.settings-logout .button{align-self:flex-start}}
