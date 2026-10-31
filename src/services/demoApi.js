@@ -37,6 +37,7 @@ async function request(mutator) {
 }
 
 export const demoApi = {
+  mode: 'demo',
   async load() {
     await pause(380);
     return structuredClone(readStore());

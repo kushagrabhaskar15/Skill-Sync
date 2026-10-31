@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { demoApi } from '../services/demoApi.js';
+import { workspaceApi } from '../services/workspaceApi.js';
 
 export function useWorkspace() {
   const [data, setData] = useState(null);
@@ -10,7 +10,7 @@ export function useWorkspace() {
     setLoading(true);
     setError('');
     try {
-      setData(await demoApi.load());
+      setData(await workspaceApi.load());
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Something went wrong while loading the demo.');
     } finally {
@@ -33,5 +33,5 @@ export function useWorkspace() {
     }
   }, []);
 
-  return { data, setData, loading, error, setError, refresh, mutate };
+  return { data, setData, loading, error, setError, refresh, mutate, api: workspaceApi };
 }
