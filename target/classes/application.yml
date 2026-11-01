@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: skillsync-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/skillsync?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:kb150405}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+
+skillsync:
+  jwt:
+    secret: ${JWT_SECRET:skillsync-dev-secret-key-change-me-in-production-must-be-long-enough-256bits}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  internal:
+    api-key: ${INTERNAL_API_KEY:skillsync-internal-dev-key}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org.hibernate.SQL: warn
+    com.skillsync: info
