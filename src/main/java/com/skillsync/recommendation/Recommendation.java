@@ -29,7 +29,7 @@ public class Recommendation {
     @JoinColumn(name = "recommended_user_id", nullable = false)
     private User recommendedUser;
 
-    @Column(nullable = false, precision = 5, scale = 4)
+    @Column(name = "match_score", precision = 5, scale = 4)
     private BigDecimal score;
 
     @Column(columnDefinition = "TEXT")

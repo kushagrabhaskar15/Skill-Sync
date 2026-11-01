@@ -1,4 +1,5 @@
-INSERT INTO skills (name, description, category) VALUES
+INSERT IGNORE INTO skills (name, description, category)
+VALUES
 ('Java', 'Object-oriented programming with Java', 'TECHNICAL'),
 ('Spring Boot', 'Building APIs and services with Spring Boot', 'TECHNICAL'),
 ('React', 'Building interactive UIs with React', 'TECHNICAL'),
