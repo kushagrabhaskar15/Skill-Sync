@@ -1,0 +1,7 @@
+/target/
+/.idea/
+SkillSync_AI_ML_Final/.env
+SkillSync_AI_ML_Final/.venv/
+SkillSync_AI_ML_Final/__pycache__/
+SkillSync_AI_ML_Final/**/*.py[cod]
+SkillSync_AI_ML_Final/.pytest_cache/

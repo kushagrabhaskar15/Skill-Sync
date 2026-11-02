@@ -1,3 +1,6 @@
+-- HISTORICAL REFERENCE ONLY. DO NOT EXECUTE against the current SkillSync database.
+-- This dump contains DROP TABLE statements and describes a schema that differs
+-- from the current Spring Boot Flyway migrations. The AI service does not use it.
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: skillsync

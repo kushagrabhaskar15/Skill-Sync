@@ -1,4 +1,4 @@
-from app.services.nlp_service import normalize_skill,shared_items
+from app.services.nlp_service import normalize_skill, shared_items
 
 def test_aliases():
     assert normalize_skill("ML")=="machine learning"
@@ -7,3 +7,6 @@ def test_aliases():
 
 def test_shared_interests():
     assert shared_items(["AI","Web Development"],["ai"])==["AI"]
+
+def test_normalize_whitespace_and_case():
+    assert normalize_skill("  Machine   Learning ")=="machine learning"

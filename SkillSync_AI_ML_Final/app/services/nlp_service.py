@@ -9,7 +9,7 @@ ALIASES={"ml":"machine learning","machine-learning":"machine learning",
          "postgres":"postgresql","sklearn":"scikit-learn"}
 
 def normalize_skill(value):
-    value=re.sub(r"\\s+"," ",(value or "").strip().lower())
+    value=re.sub(r"\s+"," ",(value or "").strip().lower())
     return ALIASES.get(value,value)
 
 def normalize_many(values):
