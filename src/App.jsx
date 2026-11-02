@@ -108,7 +108,7 @@ export default function App() {
     switch (page) {
       case 'dashboard': return <Dashboard user={data.user} peers={data.peers} activities={data.activities} backendMode={api.mode === 'backend'} onNavigate={setPage} onSelectPeer={openPeer} onConnect={connect} />;
       case 'profile': return <Profile user={data.user} backendMode={api.mode === 'backend'} loading={busy} onSave={(updates) => run(() => api.updateUser(updates), 'Your profile has been updated.')} />;
-      case 'discover': return <Discover peers={data.peers} user={data.user} backendMode={api.mode === 'backend'} onSelectPeer={openPeer} onConnect={connect} />;
+      case 'discover': return <Discover peers={data.peers} backendMode={api.mode === 'backend'} onSearchUsers={api.searchDirectory} onSelectPeer={openPeer} onConnect={connect} onMessage={(id) => { setInitialMessagePeer(id); setPage('messages'); }} />;
       case 'recommendations': return <Recommendations peers={data.peers} backendMode={api.mode === 'backend'} onSelectPeer={openPeer} onConnect={connect} />;
       case 'recommendation-detail': return <RecommendationDetail peer={peer} user={data.user} backendMode={api.mode === 'backend'} onBack={() => setPage('recommendations')} onConnect={connect} onMessage={(id) => { setInitialMessagePeer(id); setPage('messages'); }} />;
       case 'connections': return <Connections peers={data.peers} backendMode={api.mode === 'backend'} onMessage={(id) => { setInitialMessagePeer(id); setPage('messages'); }} onDiscover={() => setPage('discover')} onAccept={(id) => run(() => api.setPeerStatus(id, 'connected'), 'Connection added to your learning circle.')} />;

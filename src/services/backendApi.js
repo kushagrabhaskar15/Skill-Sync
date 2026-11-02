@@ -192,6 +192,25 @@ async function synchronizeSkills(type, currentRecords = [], desiredNames = []) {
 export const backendApi = {
   mode: 'backend',
   async load() { return loadWorkspace(); },
+  async searchDirectory(query = '', page = 0, size = 50) {
+    const params = new URLSearchParams({ page: String(page), size: String(size) });
+    if (query.trim()) params.set('query', query.trim());
+    const result = await apiRequest(`/api/v1/users/search?${params}`);
+    const knownPeers = new Map((currentWorkspace?.peers || []).map((peer) => [peer.id, peer]));
+    return {
+      ...result,
+      content: (result.content || []).map((profile) => {
+        const peer = mapPeer(profile);
+        const known = knownPeers.get(peer.id);
+        const outgoingRequestId = outgoingRequests.get(Number(peer.id));
+        return known
+          ? { ...peer, ...known, isDirectoryProfile: true }
+          : outgoingRequestId
+            ? { ...peer, status: 'pending', direction: 'outgoing', connectionId: outgoingRequestId, isDirectoryProfile: true }
+            : { ...peer, isDirectoryProfile: true };
+      }),
+    };
+  },
   async authenticate({ name, email, password }, mode = 'login') {
     const authResponse = await apiRequest(`/api/v1/auth/${mode === 'signup' ? 'register' : 'login'}`, {
       method: 'POST',
