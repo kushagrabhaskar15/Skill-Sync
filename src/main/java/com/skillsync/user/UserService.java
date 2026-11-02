@@ -9,6 +9,8 @@ import com.skillsync.enums.UserStatus;
 import com.skillsync.exception.ResourceNotFoundException;
 import com.skillsync.skill.UserSkill;
 import com.skillsync.skill.UserSkillRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,16 @@ public class UserService {
         this.userInterestRepository = userInterestRepository;
     }
 
+    @Transactional(readOnly = true)
+    public Page<UserProfileResponse> discoverUsers(Long currentUserId, String query, Pageable pageable) {
+        requireUser(currentUserId);
+        String searchTerm = query == null ? "" : query.trim();
+        Page<User> users = searchTerm.isEmpty()
+                ? userRepository.findByStatusAndIdNot(UserStatus.ACTIVE, currentUserId, pageable)
+                : userRepository.findByStatusAndIdNotAndNameContainingIgnoreCase(
+                        UserStatus.ACTIVE, currentUserId, searchTerm, pageable);
+        return users.map(this::buildProfile);
+    }
     @Transactional(readOnly = true)
     public UserProfileResponse getMyProfile(Long userId) {
         return buildProfile(requireUser(userId));
@@ -114,3 +126,5 @@ public class UserService {
         );
     }
 }
+
+

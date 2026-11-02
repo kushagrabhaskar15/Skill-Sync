@@ -16,11 +16,10 @@ Spring Boot backend for SkillSync — peer-to-peer learning, skill recommendatio
 1. Create/start MySQL 8 and ensure the app can create `skillsync` (or create it yourself).
 2. Configure credentials via env vars or `application.yml`:
 
-```bash
-DB_USERNAME=root
-DB_PASSWORD=root
-JWT_SECRET=skillsync-dev-secret-key-change-me-in-production-must-be-long-enough-256bits
-INTERNAL_API_KEY=skillsync-internal-dev-key
+```powershell
+$env:DB_USERNAME = "root"
+$securePassword = Read-Host "MySQL root password" -AsSecureString
+$env:DB_PASSWORD = [System.Net.NetworkCredential]::new("", $securePassword).Password
 ```
 
 3. Run:
@@ -64,3 +63,4 @@ API docs: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-
 ```bash
 mvn test
 ```
+
